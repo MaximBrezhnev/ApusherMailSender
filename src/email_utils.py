@@ -50,6 +50,8 @@ def send_message(
                 login=sender["login"],
                 password=sender["password"],
             )
+
+            print("Отправка сообщений...")
             server.send_message(email_message)
             server.quit()
 

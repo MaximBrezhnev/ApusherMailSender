@@ -23,7 +23,7 @@ def process_file_data(
     # Чтение данных из csv-файлов
     senders_and_recipients = []
     for file in [senders, recipients]:
-        with open(file, "r") as f:
+        with open(file.strip('"'), "r") as f:
             csv_reader = csv.DictReader(f)
             csv_list = [row for row in csv_reader]
             senders_and_recipients.append(csv_list)

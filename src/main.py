@@ -30,9 +30,10 @@ def main() -> None:
     if message_format == "1":
         message = input("Введите сообщение для рассылки: ")
     else:
-        message_file_path = input(
+        plain_message_file_path = input(
             "Введите абсолютный путь к файлу (txt или html), содержащему сообщение для рассылки: "
         )
+        message_file_path = plain_message_file_path.strip('"')
 
     while True:
         senders_file = input("Введите абсолютный путь к csv-файлу с аккаунтами, с которых будет идти рассылка: ")
@@ -48,20 +49,22 @@ def main() -> None:
         else:
             break
 
-    senders_and_recipients = file_utils.process_file_data(
-        senders=senders_file,
-        recipients=recipients_file
-    )
-    email_utils.send_message(
-        subject=subject,
-        message=message,
-        message_file_path=message_file_path,
-        senders_and_recipients=senders_and_recipients
-    )
+    try:
+        senders_and_recipients = file_utils.process_file_data(
+            senders=senders_file,
+            recipients=recipients_file
+        )
+        email_utils.send_message(
+            subject=subject,
+            message=message,
+            message_file_path=message_file_path,
+            senders_and_recipients=senders_and_recipients
+        )
+    except Exception as exc:
+        print(f"Некорректные данные отправителей/получателей: {exc}")
 
     print("Рассылка почты завершена")
 
 
 if __name__ == "__main__":
     main()
-
