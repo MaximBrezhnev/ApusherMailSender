@@ -4,5 +4,5 @@
 EMAIL_TIMEOUT: int = 180
 
 # Количество получателей, которым отправляется письмо за одну рассылку:
-EMAIL_RECIPIENTS_PER_REQUEST: int = 50
+EMAIL_RECIPIENTS_PER_REQUEST: int = 25
 
